@@ -7,9 +7,14 @@ source.include_exts = py,png,json
 source.exclude_dirs = .venv,bin,build,.buildozer,__pycache__,.git,venv
 version = 0.1
 
-# Чистый pygame. Без Kivy и без pygame-ce — это самая стабильная связка
-requirements = python3,pygame
+# Только pygame-ce, без kivy
+requirements = python3,pygame-ce
+p4a.bootstrap = sdl2
 
 orientation = landscape
 fullscreen = 1
 android.accept_sdk_license = True
+
+[buildozer]
+log_level = 2
+warn_on_root = 1
