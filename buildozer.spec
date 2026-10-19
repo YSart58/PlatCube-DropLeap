@@ -7,8 +7,8 @@ source.include_exts = py,png,json
 source.exclude_dirs = .venv,bin,build,.buildozer,__pycache__,.git,venv
 version = 0.1
 
-# Убрали kivy, оставили только pygame. Добавили явное указание SDL2
-requirements = python3,pygame
+# ✅ ВОЗВРАЩАЕМ pygame-ce и ФИКСИРУЕМ версии Python/Cython
+requirements = python3==3.11.9, kivy==2.3.0, hostpython3==3.11.9, pygame-ce
 p4a.bootstrap = sdl2
 
 orientation = landscape
