@@ -3,22 +3,20 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
-    # Берем стабильную систему
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build with Buildozer (Official Docker)
-        run: |
-          docker run --rm \
-            -v "${{ github.workspace }}":/app \
-            -v "$HOME/.buildozer":/root/.buildozer \
-            -w /app \
-            kivy/buildozer android debug
+      - name: Build with Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        id: buildozer
+        with:
+          command: buildozer android debug
+          buildozer_version: master
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: PlatCubeDL-APK
-          path: bin/*.apk
+          path: ${{ steps.buildozer.outputs.filename }}
