@@ -7,16 +7,16 @@ source.include_exts = py,png,json
 source.exclude_dirs = .venv,bin,build,.buildozer,__pycache__,.git,venv
 version = 0.1
 
-# Фиксируем стабильный Python 3.10 (3.12 ломает сборку Cython) и современный pygame-ce
-requirements = python3==3.10.12, hostpython3==3.10.12, pygame-ce
+# Kivy нужен для работы сборщика, pygame-ce - для самой игры
+requirements = python3, kivy==2.3.0, pygame-ce
 p4a.bootstrap = sdl2
 
-# Принудительно ставим NDK 23b (на новых версиях ломается компилятор clang)
+# NDK 23b - самая стабильная версия для pygame
 android.ndk = 23b
+android.accept_sdk_license = True
 
 orientation = landscape
 fullscreen = 1
-android.accept_sdk_license = True
 
 [buildozer]
 log_level = 2
