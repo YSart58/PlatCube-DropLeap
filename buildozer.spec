@@ -6,7 +6,11 @@ source.dir = .
 source.include_exts = py,png,json
 source.exclude_dirs = .venv,bin,build,.buildozer,__pycache__,.git,venv
 version = 0.1
-requirements = python3,kivy,pygame
+
+# Убрали kivy, оставили только pygame. Добавили явное указание SDL2
+requirements = python3,pygame
+p4a.bootstrap = sdl2
+
 orientation = landscape
 fullscreen = 1
 android.accept_sdk_license = True
