@@ -7,11 +7,11 @@ source.include_exts = py,png,json
 source.exclude_dirs = .venv,bin,build,.buildozer,__pycache__,.git,venv
 version = 0.1
 
-# Оставляем pygame-ce, так как он современнее
-requirements = python3,pygame-ce
+# Фиксируем стабильный Python 3.10 (3.12 ломает сборку Cython) и современный pygame-ce
+requirements = python3==3.10.12, hostpython3==3.10.12, pygame-ce
 p4a.bootstrap = sdl2
 
-# 🛡️ САМОЕ ВАЖНОЕ: принудительно ставим старый NDK, который не ломает компилятор
+# Принудительно ставим NDK 23b (на новых версиях ломается компилятор clang)
 android.ndk = 23b
 
 orientation = landscape
