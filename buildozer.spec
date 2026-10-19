@@ -7,9 +7,10 @@ source.include_exts = py,png,json
 source.exclude_dirs = .venv,bin,build,.buildozer,__pycache__,.git,venv
 version = 0.1
 
-# ✅ ВОЗВРАЩАЕМ pygame-ce и ФИКСИРУЕМ версии Python/Cython
-requirements = python3==3.11.9, kivy==2.3.0, hostpython3==3.11.9, pygame-ce
+# ✅ ФИКСИРУЕМ СТАБИЛЬНУЮ ВЕРСИЮ PYTHON И УБИРАЕМ KIVY
+requirements = python3==3.10.12, hostpython3==3.10.12, pygame-ce
 p4a.bootstrap = sdl2
+android.ndk = 25b
 
 orientation = landscape
 fullscreen = 1
