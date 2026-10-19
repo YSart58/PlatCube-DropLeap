@@ -7,9 +7,8 @@ source.include_exts = py,png,json
 source.exclude_dirs = .venv,bin,build,.buildozer,__pycache__,.git,venv
 version = 0.1
 
-# Только pygame-ce, без kivy
+# Оставляем только pygame-ce, без лишнего kivy
 requirements = python3,pygame-ce
-p4a.bootstrap = sdl2
 
 orientation = landscape
 fullscreen = 1
