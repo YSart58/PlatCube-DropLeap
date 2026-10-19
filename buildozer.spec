@@ -7,10 +7,12 @@ source.include_exts = py,png,json
 source.exclude_dirs = .venv,bin,build,.buildozer,__pycache__,.git,venv
 version = 0.1
 
-# ✅ ФИКСИРУЕМ СТАБИЛЬНУЮ ВЕРСИЮ PYTHON И УБИРАЕМ KIVY
-requirements = python3==3.10.12, hostpython3==3.10.12, pygame-ce
+# Оставляем pygame-ce, так как он современнее
+requirements = python3,pygame-ce
 p4a.bootstrap = sdl2
-android.ndk = 25b
+
+# 🛡️ САМОЕ ВАЖНОЕ: принудительно ставим старый NDK, который не ломает компилятор
+android.ndk = 23b
 
 orientation = landscape
 fullscreen = 1
