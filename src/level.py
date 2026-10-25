@@ -1,5 +1,6 @@
 import os
 import json
+import math
 import pygame
 from .settings import ASSETS_DIR, TILE_SIZE
 
@@ -124,10 +125,38 @@ class Level:
             json.dump(self.serialize(), f, indent=2, ensure_ascii=False)
         os.replace(tmp, path)
 
+    # ---------- отрисовка ----------
     def draw(self, surf, cam_x=0):
         for b in self.blocks:
             b.draw(surf, cam_x)
         for s in self.spikes:
             s.draw(surf, cam_x)
+        
         if self.exit:
+            # 🎯 ПУЛЬСИРУЮЩЕЕ СВЕЧЕНИЕ ПОРТАЛА
+            # Берем текущее время в секундах
+            time_sec = pygame.time.get_ticks() / 1000.0
+            
+            # sin() выдает значения от -1 до 1. Превращаем это в пульсацию от 0 до 1
+            pulse = (math.sin(time_sec * 5.0) + 1.0) / 2.0
+            
+            # Настраиваем размер и прозрачность свечения
+            glow_radius = 24 + (pulse * 12)  # Радиус меняется от 24 до 36 пикселей
+            alpha = int(40 + (pulse * 60))   # Прозрачность меняется от 40 до 100
+            
+            # Создаем поверхность для свечения
+            glow_size = int(glow_radius * 2)
+            glow_surf = pygame.Surface((glow_size, glow_size), pygame.SRCALPHA)
+            
+            # Рисуем несколько кругов друг на друге для мягкого градиента (светло-желтый)
+            pygame.draw.circle(glow_surf, (255, 255, 150, alpha // 3), (glow_radius, glow_radius), glow_radius)
+            pygame.draw.circle(glow_surf, (255, 255, 150, alpha // 2), (glow_radius, glow_radius), glow_radius * 0.7)
+            pygame.draw.circle(glow_surf, (255, 255, 180, alpha), (glow_radius, glow_radius), glow_radius * 0.4)
+            
+            # Позиционируем свечение ровно по центру портала
+            glow_x = self.exit.rect.centerx - cam_x - glow_radius
+            glow_y = self.exit.rect.centery - glow_radius
+            
+            # Сначала рисуем свечение (оно будет позади), затем сам портал
+            surf.blit(glow_surf, (glow_x, glow_y))
             self.exit.draw(surf, cam_x)
